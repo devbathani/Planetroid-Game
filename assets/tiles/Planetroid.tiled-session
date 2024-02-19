@@ -1,0 +1,54 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "planetroid_01.tmx",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "file.lastUsedOpenFilter": "All Files (*)",
+    "fileStates": {
+        "Terran.tsx": {
+            "scaleInDock": 3.4257,
+            "scaleInEditor": 1
+        },
+        "planetroid_01.tmx": {
+            "scale": 0.8691,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 329.6513634794615,
+                "y": 151.3059486825452
+            }
+        },
+        "terran.tsx": {
+            "scaleInDock": 5.5549,
+            "scaleInEditor": 1
+        },
+        "terran_blackground.tsx": {
+            "scaleInDock": 11.0276,
+            "scaleInEditor": 1
+        }
+    },
+    "last.imagePath": "/Users/devbathani/Desktop/Work/planetriod-game/assets/images/Planets",
+    "map.height": 23,
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 16,
+    "map.tileWidth": 16,
+    "map.width": 40,
+    "openFiles": [
+        "planetroid_01.tmx"
+    ],
+    "project": "Planetroid.tiled-project",
+    "recentFiles": [
+        "planetroid_01.tmx",
+        "terran.tsx",
+        "terran_blackground.tsx",
+        "Terran.tsx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 1,
+        "width": 1
+    }
+}
