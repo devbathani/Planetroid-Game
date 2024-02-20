@@ -12,7 +12,7 @@ class PlanetroidMap extends World with HasGameRef<PlanetroidGame> {
   late Planet planet;
   double planetGravity = 100;
   final String level;
-
+  Vector2 mapSize = Vector2(800, 600);
   PlanetroidMap({required this.level});
 
   void spawingObjects() {
@@ -24,7 +24,7 @@ class PlanetroidMap extends World with HasGameRef<PlanetroidGame> {
             planet = Planet(
               position: Vector2(spawnPoint.x, spawnPoint.y),
               size: Vector2(spawnPoint.width, spawnPoint.height),
-              planetName: "planet_77",
+              planetName: "planet_36",
             );
             add(planet);
             break;
@@ -33,6 +33,7 @@ class PlanetroidMap extends World with HasGameRef<PlanetroidGame> {
               position: Vector2(spawnPoint.x, spawnPoint.y),
               size: Vector2(spawnPoint.width, spawnPoint.height),
             );
+
             add(space);
             break;
           case 'Rocket':
@@ -41,6 +42,7 @@ class PlanetroidMap extends World with HasGameRef<PlanetroidGame> {
               Vector2(2, 2),
               planet,
               planetGravity,
+              mapSize,
             );
             add(rocket);
             break;

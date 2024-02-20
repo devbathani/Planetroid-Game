@@ -10,9 +10,9 @@ class SpaceBackground extends SpriteComponent with HasGameRef<PlanetroidGame> {
   });
   @override
   FutureOr<void> onLoad() {
+    priority = -1;
     sprite = Sprite(
-      game.images
-          .fromCache("space/Purple Nebula/Purple_Nebula_01-1024x1024.png"),
+      game.images.fromCache("space/Starfields/Starfield_02-1024x1024.png"),
     );
     return super.onLoad();
   }
