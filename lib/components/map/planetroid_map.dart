@@ -24,7 +24,7 @@ class PlanetroidMap extends World with HasGameRef<PlanetroidGame> {
             planet = Planet(
               position: Vector2(spawnPoint.x, spawnPoint.y),
               size: Vector2(spawnPoint.width, spawnPoint.height),
-              planetName: "planet_36",
+              planetName: "planet_143",
             );
             add(planet);
             break;

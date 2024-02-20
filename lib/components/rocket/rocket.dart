@@ -114,9 +114,9 @@ class Rocket extends SpriteAnimationGroupComponent
 
   void reSpawn() {
     if (game.playSound) {
-      FlameAudio.play("hit.mp3");
+      FlameAudio.play("hit.mp3", volume: 0.2);
     }
-    const hitDuration = Duration(seconds: 3);
+    const hitDuration = Duration(milliseconds: 350);
     const appearingDuration = Duration(milliseconds: 350);
     const canMoveDuration = Duration(milliseconds: 400);
     gotHit = true;
