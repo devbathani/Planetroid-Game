@@ -4,6 +4,8 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/services.dart';
+import 'package:planetriod/components/asteroids/asteroids.dart';
+import 'package:planetriod/components/map/planetroid_map.dart';
 import 'package:planetriod/components/planet/planet.dart';
 import 'package:planetriod/model/custom_hitbox_entity.dart';
 import 'package:planetriod/planetroid_game.dart';
@@ -20,7 +22,7 @@ class Rocket extends SpriteAnimationGroupComponent
   Planet planet;
   final double planetGravity;
   CustomHitBoxEntity customHitBoxEntity =
-      CustomHitBoxEntity(offSetX: 0, offSetY: 0, width: 20, height: 20);
+      CustomHitBoxEntity(offSetX: 5, offSetY: 5, width: 13, height: 15);
   late final SpriteAnimation upAnimation;
   late final SpriteAnimation downAnimation;
   late final SpriteAnimation leftAnimation;
@@ -30,7 +32,7 @@ class Rocket extends SpriteAnimationGroupComponent
   String baseImagePath = "hit_animation";
   Vector2 startingPosition = Vector2.zero();
   List<Sprite> hitSprites = [];
-
+  PlanetroidMap planetroidMap = PlanetroidMap(level: "planetroid_01.tmx");
   Rocket(
     Vector2 position,
     this.velocity,
@@ -128,6 +130,7 @@ class Rocket extends SpriteAnimationGroupComponent
         velocity = Vector2.zero();
         position = startingPosition;
         current = RocketState.right;
+
         Future.delayed(canMoveDuration, () => gotHit = false);
       }); // Future.delayed
     }); // Future.delayed
@@ -161,6 +164,7 @@ class Rocket extends SpriteAnimationGroupComponent
   void onCollisionStart(
       Set<Vector2> intersectionPoints, PositionComponent other) {
     if (other is Planet) reSpawn();
+    if (other is Asteroid) reSpawn();
     super.onCollisionStart(intersectionPoints, other);
   }
 }

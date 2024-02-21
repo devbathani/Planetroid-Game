@@ -65,6 +65,10 @@ flutter:
     - assets/images/
     - assets/images/explosions/
     - assets/images/planets/
+    - assets/images/asteroids/
+    - assets/images/heart/
+    - assets/images/asteroids/asteroid-explosion/
+    - assets/images/asteroids/
     - assets/images/space/Blue Nebula/
     - assets/images/space/Green Nebula/
     - assets/images/space/Purple Nebula/

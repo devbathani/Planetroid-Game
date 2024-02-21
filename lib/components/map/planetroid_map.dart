@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
+import 'package:planetriod/components/asteroids/asteroids.dart';
+import 'package:planetriod/components/heart/heart.dart';
 import 'package:planetriod/components/planet/planet.dart';
 import 'package:planetriod/components/rocket/rocket.dart';
 import 'package:planetriod/components/space/space_background.dart';
@@ -12,8 +14,19 @@ class PlanetroidMap extends World with HasGameRef<PlanetroidGame> {
   late Planet planet;
   double planetGravity = 100;
   final String level;
-  Vector2 mapSize = Vector2(800, 600);
+  Vector2 mapSize = Vector2(700, 500);
   PlanetroidMap({required this.level});
+  List<Heart> hearts = []; // List to hold all heart objects
+
+  // Function to spawn hearts
+  void spawnHeart(Vector2 position, Vector2 size) {
+    final heart = Heart(
+      position: position,
+      size: size,
+    );
+    add(heart);
+    hearts.add(heart); // Add heart to the list
+  }
 
   void spawingObjects() {
     final spawnPointsLayer = map.tileMap.getLayer<ObjectGroup>("Spawnpoints");
@@ -46,38 +59,25 @@ class PlanetroidMap extends World with HasGameRef<PlanetroidGame> {
             );
             add(rocket);
             break;
+          case 'Asteroid':
+            final asteroid = Asteroid(
+              position: Vector2(spawnPoint.x, spawnPoint.y),
+              size: Vector2(spawnPoint.width, spawnPoint.height),
+            );
+            add(asteroid);
+            break;
+          case 'Heart':
+            spawnHeart(
+              Vector2(spawnPoint.x, spawnPoint.y),
+              Vector2(spawnPoint.width, spawnPoint.height),
+            );
+            break;
+
           default:
         }
       }
     }
   }
-
-  // void addCollisions() {
-  //   final collisionsLayer = map.tileMap.getLayer<ObjectGroup>('Collisions');
-  //   if (collisionsLayer != null) {
-  //     for (final collision in collisionsLayer.objects) {
-  //       switch (collision.class_) {
-  //         case 'Platform':
-  //           final platform = CollisionsBlock(
-  //             position: Vector2(collision.x, collision.y),
-  //             size: Vector2(collision.width, collision.height),
-  //             isPlatform: true,
-  //           );
-  //           collisionBlockList.add(platform);
-  //           add(platform);
-  //           break;
-  //         default:
-  //           final block = CollisionsBlock(
-  //             position: Vector2(collision.x, collision.y),
-  //             size: Vector2(collision.width, collision.height),
-  //           );
-  //           collisionBlockList.add(block);
-  //           add(block);
-  //       }
-  //     }
-  //   }
-  //   player.collisionBlockList = collisionBlockList;
-  // }
 
   @override
   Future<void> onLoad() async {

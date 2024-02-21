@@ -13,12 +13,16 @@
             "scaleInDock": 3.4257,
             "scaleInEditor": 1
         },
+        "asteroids.tsx": {
+            "scaleInDock": 0.638,
+            "scaleInEditor": 1
+        },
         "planetroid_01.tmx": {
-            "scale": 0.8412,
+            "scale": 0.8495,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 345.33999048977654,
-                "y": 220.5183071802187
+                "x": 397.2925250147145,
+                "y": 183.04885226603886
             }
         },
         "terran.tsx": {
@@ -30,7 +34,7 @@
             "scaleInEditor": 1
         }
     },
-    "last.imagePath": "/Users/devbathani/Desktop/Work/planetriod-game/assets/images/Planets",
+    "last.imagePath": "/Users/devbathani/Desktop/Work/planetriod-game/assets/images",
     "map.height": 23,
     "map.lastUsedFormat": "tmx",
     "map.tileHeight": 16,
@@ -42,13 +46,14 @@
     "project": "Planetroid.tiled-project",
     "recentFiles": [
         "planetroid_01.tmx",
+        "asteroids.tsx",
         "terran.tsx",
         "terran_blackground.tsx",
         "Terran.tsx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
-        "height": 1,
-        "width": 1
+        "height": 16,
+        "width": 16
     }
 }
