@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
@@ -16,16 +17,17 @@ class PlanetroidMap extends World with HasGameRef<PlanetroidGame> {
   final String level;
   Vector2 mapSize = Vector2(700, 500);
   PlanetroidMap({required this.level});
-  List<Heart> hearts = []; // List to hold all heart objects
-
-  // Function to spawn hearts
-  void spawnHeart(Vector2 position, Vector2 size) {
-    final heart = Heart(
-      position: position,
-      size: size,
-    );
-    add(heart);
-    hearts.add(heart); // Add heart to the list
+  List<Heart> hearts = [];
+  int lives = 3;
+  decreaseLife() {
+    if (hearts.isNotEmpty) {
+      log(hearts.length.toString());
+      // Remove the last heart
+      final heartToRemove = hearts.removeLast();
+      remove(heartToRemove);
+    } else {
+      log("Game over! No lives left.");
+    }
   }
 
   void spawingObjects() {
@@ -46,8 +48,16 @@ class PlanetroidMap extends World with HasGameRef<PlanetroidGame> {
               position: Vector2(spawnPoint.x, spawnPoint.y),
               size: Vector2(spawnPoint.width, spawnPoint.height),
             );
-
             add(space);
+            break;
+          case 'Heart':
+            final heart = Heart(
+              position: Vector2(spawnPoint.x, spawnPoint.y),
+              size: Vector2(spawnPoint.width, spawnPoint.height),
+            );
+            hearts.add(heart);
+            print(hearts.length);
+            add(heart);
             break;
           case 'Rocket':
             final rocket = Rocket(
@@ -65,12 +75,6 @@ class PlanetroidMap extends World with HasGameRef<PlanetroidGame> {
               size: Vector2(spawnPoint.width, spawnPoint.height),
             );
             add(asteroid);
-            break;
-          case 'Heart':
-            spawnHeart(
-              Vector2(spawnPoint.x, spawnPoint.y),
-              Vector2(spawnPoint.width, spawnPoint.height),
-            );
             break;
 
           default:

@@ -28,11 +28,11 @@ class Rocket extends SpriteAnimationGroupComponent
   late final SpriteAnimation leftAnimation;
   late final SpriteAnimation rightAnimation;
   late final SpriteAnimation hitAnimation;
-
+  PlanetroidMap planetroidMap = PlanetroidMap(level: "planetroid_01.tmx");
   String baseImagePath = "hit_animation";
   Vector2 startingPosition = Vector2.zero();
   List<Sprite> hitSprites = [];
-  PlanetroidMap planetroidMap = PlanetroidMap(level: "planetroid_01.tmx");
+
   Rocket(
     Vector2 position,
     this.velocity,
@@ -74,6 +74,28 @@ class Rocket extends SpriteAnimationGroupComponent
     current = RocketState.right;
   }
 
+  void reSpawn() {
+    if (game.playSound) {
+      FlameAudio.play("hit.mp3", volume: 0.2);
+    }
+    const hitDuration = Duration(milliseconds: 350);
+    const appearingDuration = Duration(milliseconds: 350);
+    const canMoveDuration = Duration(milliseconds: 400);
+    gotHit = true;
+    current = RocketState.hit;
+    Future.delayed(hitDuration, () {
+      scale.x = 1;
+      position = startingPosition - Vector2.all(32);
+      Future.delayed(appearingDuration, () {
+        velocity = Vector2.zero();
+        position = startingPosition;
+        current = RocketState.right;
+        planetroidMap.decreaseLife();
+        Future.delayed(canMoveDuration, () => gotHit = false);
+      }); // Future.delayed
+    }); // Future.delayed
+  }
+
   @override
   FutureOr<void> onLoad() {
     add(RectangleHitbox(
@@ -112,28 +134,6 @@ class Rocket extends SpriteAnimationGroupComponent
         position.y -= mapSize.y;
       }
     }
-  }
-
-  void reSpawn() {
-    if (game.playSound) {
-      FlameAudio.play("hit.mp3", volume: 0.2);
-    }
-    const hitDuration = Duration(milliseconds: 350);
-    const appearingDuration = Duration(milliseconds: 350);
-    const canMoveDuration = Duration(milliseconds: 400);
-    gotHit = true;
-    current = RocketState.hit;
-    Future.delayed(hitDuration, () {
-      scale.x = 1;
-      position = startingPosition - Vector2.all(32);
-      Future.delayed(appearingDuration, () {
-        velocity = Vector2.zero();
-        position = startingPosition;
-        current = RocketState.right;
-
-        Future.delayed(canMoveDuration, () => gotHit = false);
-      }); // Future.delayed
-    }); // Future.delayed
   }
 
   @override

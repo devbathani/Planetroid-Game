@@ -14,7 +14,7 @@ class Heart extends SpriteAnimationGroupComponent
   });
   late final SpriteAnimation idleAnimation;
   int lives = 3;
-  late List<Sprite>? heartSprites;
+
   void initializeAsteroids() {
     idleAnimation = SpriteAnimation.spriteList(
       [
@@ -32,6 +32,10 @@ class Heart extends SpriteAnimationGroupComponent
       AsteroidState.idle: idleAnimation,
     };
     current = AsteroidState.idle;
+  }
+
+  void decreaseLife() {
+    lives--;
   }
 
   @override
