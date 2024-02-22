@@ -18,11 +18,11 @@
             "scaleInEditor": 1
         },
         "planetroid_01.tmx": {
-            "scale": 0.8495,
+            "scale": 1.4567,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 397.2925250147145,
-                "y": 183.04885226603886
+                "x": 485.6868263884121,
+                "y": 130.77503947278092
             }
         },
         "terran.tsx": {

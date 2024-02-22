@@ -13,7 +13,7 @@ import 'package:planetriod/planetroid_game.dart';
 class PlanetroidMap extends World with HasGameRef<PlanetroidGame> {
   late TiledComponent map;
   late Planet planet;
-  double planetGravity = 100;
+  double planetGravity = 800000;
   final String level;
   Vector2 mapSize = Vector2(700, 500);
   PlanetroidMap({required this.level});
@@ -62,7 +62,7 @@ class PlanetroidMap extends World with HasGameRef<PlanetroidGame> {
           case 'Rocket':
             final rocket = Rocket(
               Vector2(spawnPoint.x, spawnPoint.y),
-              Vector2(2, 2),
+              Vector2(0, 0),
               planet,
               planetGravity,
               mapSize,

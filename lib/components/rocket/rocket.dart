@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
@@ -41,7 +42,7 @@ class Rocket extends SpriteAnimationGroupComponent
     this.mapSize,
   ) : super(position: position, size: Vector2.all(32)) {
     thrust = 100.0;
-    maxSpeed = 200.0;
+    maxSpeed = 300.0;
   }
   SpriteAnimation spritAnimation(String name, int amount, double vectorSize) {
     return SpriteAnimation.fromFrameData(
@@ -113,9 +114,17 @@ class Rocket extends SpriteAnimationGroupComponent
     super.update(dt);
     if (!gotHit) {
       // Apply gravity towards the planet
-      final direction = (planet.position - position).normalized();
-      velocity += direction * planetGravity * dt;
 
+      final r = position.distanceTo(planet.position);
+      print("radius : $r");
+      final sinTheta = ((planet.position - position).x) / r;
+      final cosTheta = ((planet.position - position).y) / r;
+      final Vector2 gravity = Vector2(
+          (planetGravity * sinTheta) / (pow(r, 1.7)),
+          (planetGravity * cosTheta) / (pow(r, 1.7)));
+
+      velocity += gravity * dt;
+      print("velocity : $velocity");
       // Clamp velocity magnitude
       velocity.clampLength(0, maxSpeed);
 
@@ -141,6 +150,7 @@ class Rocket extends SpriteAnimationGroupComponent
     if (!gotHit) {
       if (keysPressed.contains(LogicalKeyboardKey.keyW)) {
         velocity.y -= thrust;
+        print("object");
         current = RocketState.up;
       }
       if (keysPressed.contains(LogicalKeyboardKey.keyA)) {
