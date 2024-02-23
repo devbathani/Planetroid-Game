@@ -36,8 +36,6 @@
   <object id="16" name="Asteroid" type="Asteroid" x="64" y="192" width="64" height="64"/>
   <object id="18" name="Asteroid" type="Asteroid" x="192" y="288" width="64" height="64"/>
   <object id="19" name="Asteroid" type="Asteroid" x="480" y="240" width="64" height="64"/>
-  <object id="20" name="Heart" type="Heart" x="528" y="16" width="32" height="32"/>
-  <object id="22" name="Heart" type="Heart" x="560" y="16" width="32" height="32"/>
   <object id="23" name="Heart" type="Heart" x="592" y="16" width="32" height="32"/>
  </objectgroup>
 </map>

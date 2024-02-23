@@ -6,7 +6,7 @@ import 'package:flame/components.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/services.dart';
 import 'package:planetriod/components/asteroids/asteroids.dart';
-import 'package:planetriod/components/map/planetroid_map.dart';
+import 'package:planetriod/components/heart/heart.dart';
 import 'package:planetriod/components/planet/planet.dart';
 import 'package:planetriod/model/custom_hitbox_entity.dart';
 import 'package:planetriod/planetroid_game.dart';
@@ -29,7 +29,7 @@ class Rocket extends SpriteAnimationGroupComponent
   late final SpriteAnimation leftAnimation;
   late final SpriteAnimation rightAnimation;
   late final SpriteAnimation hitAnimation;
-  PlanetroidMap planetroidMap = PlanetroidMap(level: "planetroid_01.tmx");
+  Heart heart = Heart();
   String baseImagePath = "hit_animation";
   Vector2 startingPosition = Vector2.zero();
   List<Sprite> hitSprites = [];
@@ -91,7 +91,7 @@ class Rocket extends SpriteAnimationGroupComponent
         velocity = Vector2.zero();
         position = startingPosition;
         current = RocketState.right;
-        planetroidMap.decreaseLife();
+        heart.decreaseLife();
         Future.delayed(canMoveDuration, () => gotHit = false);
       }); // Future.delayed
     }); // Future.delayed
@@ -116,7 +116,7 @@ class Rocket extends SpriteAnimationGroupComponent
       // Apply gravity towards the planet
 
       final r = position.distanceTo(planet.position);
-      print("radius : $r");
+
       final sinTheta = ((planet.position - position).x) / r;
       final cosTheta = ((planet.position - position).y) / r;
       final Vector2 gravity = Vector2(
@@ -124,7 +124,7 @@ class Rocket extends SpriteAnimationGroupComponent
           (planetGravity * cosTheta) / (pow(r, 1.7)));
 
       velocity += gravity * dt;
-      print("velocity : $velocity");
+
       // Clamp velocity magnitude
       velocity.clampLength(0, maxSpeed);
 
@@ -150,7 +150,7 @@ class Rocket extends SpriteAnimationGroupComponent
     if (!gotHit) {
       if (keysPressed.contains(LogicalKeyboardKey.keyW)) {
         velocity.y -= thrust;
-        print("object");
+
         current = RocketState.up;
       }
       if (keysPressed.contains(LogicalKeyboardKey.keyA)) {

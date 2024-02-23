@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
@@ -15,23 +14,13 @@ class PlanetroidMap extends World with HasGameRef<PlanetroidGame> {
   late Planet planet;
   double planetGravity = 800000;
   final String level;
+
   Vector2 mapSize = Vector2(700, 500);
   PlanetroidMap({required this.level});
-  List<Heart> hearts = [];
-  int lives = 3;
-  decreaseLife() {
-    if (hearts.isNotEmpty) {
-      log(hearts.length.toString());
-      // Remove the last heart
-      final heartToRemove = hearts.removeLast();
-      remove(heartToRemove);
-    } else {
-      log("Game over! No lives left.");
-    }
-  }
 
   void spawingObjects() {
     final spawnPointsLayer = map.tileMap.getLayer<ObjectGroup>("Spawnpoints");
+
     if (spawnPointsLayer != null) {
       for (final spawnPoint in spawnPointsLayer.objects) {
         switch (spawnPoint.class_) {
@@ -51,12 +40,12 @@ class PlanetroidMap extends World with HasGameRef<PlanetroidGame> {
             add(space);
             break;
           case 'Heart':
+            // Create hearts based on the number of lives
             final heart = Heart(
               position: Vector2(spawnPoint.x, spawnPoint.y),
               size: Vector2(spawnPoint.width, spawnPoint.height),
             );
-            hearts.add(heart);
-            print(hearts.length);
+
             add(heart);
             break;
           case 'Rocket':
@@ -86,6 +75,7 @@ class PlanetroidMap extends World with HasGameRef<PlanetroidGame> {
   @override
   Future<void> onLoad() async {
     map = await TiledComponent.load(level, Vector2.all(16));
+
     add(map);
     spawingObjects();
     // addCollisions();
