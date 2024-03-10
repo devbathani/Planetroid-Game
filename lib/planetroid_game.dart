@@ -19,7 +19,7 @@ class PlanetroidGame extends FlameGame
   late JoystickComponent joystickComponent;
 
   bool showControlls = false;
-  bool playSound = false;
+  bool playSound = true;
   List<String> levelNames = [
     "planetroid_01.tmx",
   ];
